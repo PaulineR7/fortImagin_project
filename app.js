@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
     res.send('salut')
-})
+}) 
 
 const userRouter= require('./routes/userRoutes')
 const battlePassRouter = require('./routes/battlePassRoutes')
@@ -19,6 +19,8 @@ const commentRouter = require('./routes/commentRoutes')
 app.use('/api/users', userRouter)
 app.use('/api/battlepass', battlePassRouter)
 app.use('/api/comment', commentRouter)
+
+app.use('/images', express.static(__dirname + '/images'));
 
 app.listen(port, () => {
     console.log(`Example app listening ${port}`)
