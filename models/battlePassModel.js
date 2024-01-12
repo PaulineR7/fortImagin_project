@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         imageUrl: {
             type: DataTypes.STRING
         },
-        text : {
-            type: DataTypes.STRING
+        history : {
+            type: DataTypes.TEXT
         }
     })
 }

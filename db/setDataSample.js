@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt')
 
 const setBattlePass = (BattlePass) => {
     return Promise.all(mockBattlePass.map((element) => {
-        const newCoworking = { ...element, id: null }
-        return BattlePass.create(newCoworking)
+        const newBattlePass = { ...element, id: null }
+        return BattlePass.create(newBattlePass)
             .then(() => { })
             .catch((error) => {
                 console.log(error.message)

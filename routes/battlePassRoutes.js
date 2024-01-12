@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('../middleware/multer-config');
-const { BattlePass } = require('../db/sequelizeSetup')
-const {findAllBattlePass, findBattlePassByPk, createBattlePassWithImg, updateBattlePassWithImg, deleteBattlePass} =require('../controllers/battlePassControllers')
-const { protect, restrictToOwnUser } = require('../controllers/authControllers')
+const BattlePass = require('../db/sequelizeSetup')
+const {findAllBattlePass, findBattlePassByPk, createBattlePassWithImg, updateBattlePassWithImg, deleteBattlePass, findAllBattlePassByUser} =require('../controllers/battlePassControllers')
+const { protect, restrictToOwnUser } = require('../controllers/authControllers');
 
 
 
@@ -27,6 +27,10 @@ router
 router
     .route('/:id')
     .get(findBattlePassByPk)
+
+router
+    .route('/users/:pseudo')
+    .get(protect, findAllBattlePassByUser)
     
 
 

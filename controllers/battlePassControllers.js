@@ -1,11 +1,32 @@
 const { UniqueConstraintError, ValidationError, QueryTypes } = require('sequelize')
-const { BattlePass, User, Comment, sequelize } = require('../db/sequelizeSetup')
+const { BattlePass, User, sequelize } = require('../db/sequelizeSetup')
 
 
 const findAllBattlePass= (req, res) => {
     BattlePass.findAll()
         .then((results) => {
             res.json(results)
+            console.log(results)
+        })
+        .catch(error => {
+            res.status(500).json(error.message)
+        })
+}
+
+const findAllBattlePassByUser = (req, res) => {
+    
+    User.findOne({ where: {pseudo : req.params.pseudo}})
+        .then((results) => {
+            if (!results) {
+                res.status(404).json({ message: `Aucun utilisateur n'a été trouvé.` })
+            }
+            return BattlePass.findAll({ where: { userId : results.id}})
+            .then((results) => {
+                if (results.length === 0) {
+                   return res.status(404).json({ message: `Vous n'avez pas encore créé de Battle pass` })
+                }
+                res.json(results)
+            })
         })
         .catch(error => {
             res.status(500).json(error.message)
@@ -15,6 +36,8 @@ const findAllBattlePass= (req, res) => {
 
 
 const findBattlePassByPk = (req, res) => {
+    console.log("ou la")
+
     BattlePass.findByPk((parseInt(req.params.id)))
         .then((result) => {
             if (result) {
@@ -103,4 +126,4 @@ const deleteBattlePass = (req, res) => {
 
 
 
-module.exports = {findAllBattlePass, findBattlePassByPk, createBattlePassWithImg, updateBattlePassWithImg, deleteBattlePass}
+module.exports = {findAllBattlePass, findBattlePassByPk, createBattlePassWithImg, updateBattlePassWithImg, deleteBattlePass, findAllBattlePassByUser}

@@ -31,11 +31,11 @@ sequelize.authenticate()
     .catch(error => console.error(`Impossible de se connecter à la base de données ${error}`))
 
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
     .then(async () => {
         await setRoles(Role)
         await setUsers(User)
-        await setBattlePass(BattlePass)
+        //await setBattlePass(BattlePass)
     })
     .catch(error => {
         console.log(error)

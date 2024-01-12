@@ -55,6 +55,7 @@ const protect = (req, res, next) => {
 }
 
 const restrictToOwnUser = (model) => {
+    console.log("toto")
     return (req, res, next) => {
         User.findOne(
             {

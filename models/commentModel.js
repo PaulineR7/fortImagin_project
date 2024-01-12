@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('comments', {
-        text: {
+        reviews: {
             type: DataTypes.STRING
         }
     })

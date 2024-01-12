@@ -2,6 +2,7 @@ const express = require('express')
 const {sequelize} = require('./db/sequelizeSetup')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors')
 const morgan = require('morgan')
 const port = 3000
 
@@ -16,6 +17,7 @@ const userRouter= require('./routes/userRoutes')
 const battlePassRouter = require('./routes/battlePassRoutes')
 const commentRouter = require('./routes/commentRoutes')
 
+app.use(cors())
 app.use('/api/users', userRouter)
 app.use('/api/battlepass', battlePassRouter)
 app.use('/api/comment', commentRouter)
